@@ -114,3 +114,19 @@ f1-simulator/
 - Weather data is fetched in **real time** from Open-Meteo (no API key needed)
 - The `node_modules` folder is not included run `npm install` to generate it
 - Simulation history is saved permanently in `data/simulations.json`
+
+---
+
+## Disclaimer
+
+This project is a **non-commercial academic diploma project** created for educational purposes only.
+
+The following assets used in this project are the property of their respective owners:
+
+- **Driver images** — © Formula 1 / respective teams
+- **Team car images** — © Formula 1 / respective constructors  
+- **Tyre compound images** — © Pirelli
+
+These images are used purely for educational and demonstrative purposes within an academic context and are not intended for commercial use. No copyright infringement is intended.
+
+All Formula 1 related trademarks, logos and images are the property of **Formula One World Championship Limited**, a subsidiary of **Liberty Media Corporation**.
