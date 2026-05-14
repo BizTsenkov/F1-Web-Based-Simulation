@@ -110,7 +110,7 @@ f1-simulator/
 
 ## Notes
 
-- The database is **in-memory** — it resets every time the server restarts
+- The database is **in-memory** it resets every time the server restarts
 - Weather data is fetched in **real time** from Open-Meteo (no API key needed)
-- The `node_modules` folder is not included — run `npm install` to generate it
+- The `node_modules` folder is not included run `npm install` to generate it
 - Simulation history is saved permanently in `data/simulations.json`
