@@ -123,6 +123,7 @@ This project is a **non-commercial academic diploma project** created for educat
 
 The following assets used in this project are the property of their respective owners:
 
+- **Driver numbers** - © Formula 1 / respective drivers
 - **Driver images** — © Formula 1 / respective teams
 - **Team car images** — © Formula 1 / respective constructors  
 - **Tyre compound images** — © Pirelli
