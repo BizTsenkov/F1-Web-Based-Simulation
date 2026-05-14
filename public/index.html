@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1 2026 Season Simulator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="header-left">
+        <div class="header-logo">F1</div>
+        <h1 data-i18n="title">F1 2026 Season Simulator</h1>
+      </div>
+      <div class="header-right">
+        <div class="lang-toggle">
+          <button
+            class="lang-btn active"
+            id="langEN"
+            onclick="setLanguage('en')"
+          >
+            EN
+          </button>
+          <button class="lang-btn" id="langBG" onclick="setLanguage('bg')">
+            BG
+          </button>
+        </div>
+        <a
+          href="/history.html"
+          class="export-btn"
+          id="historyBtn"
+          style="
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+          "
+          >🗂️ History</a
+        >
+        <button class="export-btn" id="exportBtn" data-i18n="exportBtn">
+          Export JSON
+        </button>
+        <button class="reset-btn" id="resetBtn" data-i18n="resetBtn">
+          Reset Season
+        </button>
+        <button class="simulate-btn" id="simulateBtn" data-i18n="simulateBtn">
+          Simulate Next Race
+        </button>
+      </div>
+    </header>
+
+    <!-- ── Main ───────────────────────────────────────────────── -->
+    <main class="container">
+      <!-- Race Info -->
+      <div class="panel race-info-panel">
+        <div class="panel-header">
+          <span class="panel-icon">🏁</span>
+          <h2 data-i18n="currentRaceInfo">Current Race Info</h2>
+        </div>
+        <div class="panel-body" id="raceInfo">
+          <div class="empty-state">
+            <div class="empty-state-icon">🏎️</div>
+            <div class="empty-state-text" data-i18n="clickToStart">
+              Click the button to start the season simulation.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Race Result + Driver Standings -->
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-icon">📋</span>
+            <h2 data-i18n="raceResult">Race Result</h2>
+          </div>
+          <div class="panel-body" id="raceResultsTable">
+            <div class="empty-state">
+              <div class="empty-state-icon">🏁</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-icon">🏆</span>
+            <h2 data-i18n="driverStandings">Driver Championship Standings</h2>
+          </div>
+          <div class="panel-body" id="standingsTable">
+            <div class="empty-state">
+              <div class="empty-state-icon">🏆</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Constructor Standings + Ratings After Race -->
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-icon">🔧</span>
+            <h2 data-i18n="constructorStandings">Constructor Standings</h2>
+          </div>
+          <div class="panel-body" id="constructorsTable">
+            <div class="empty-state">
+              <div class="empty-state-icon">🔧</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-icon">📈</span>
+            <h2 data-i18n="ratingsAfterRace">Driver Ratings After Race</h2>
+          </div>
+          <div class="panel-body" id="ratingsTable">
+            <div class="empty-state">
+              <div class="empty-state-icon">📈</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Initial Ratings -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-icon">⭐</span>
+          <h2 data-i18n="initialRatings">Initial Driver Ratings</h2>
+        </div>
+        <div class="panel-body" id="initialRatingsTable">
+          <div class="empty-state"><div class="empty-state-icon">⭐</div></div>
+        </div>
+      </div>
+
+      <!-- Race History -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-icon">📜</span>
+          <h2 data-i18n="raceHistory">Race History</h2>
+        </div>
+        <div class="panel-body" id="historyCards">
+          <div class="empty-state">
+            <div class="empty-state-icon">📜</div>
+            <div class="empty-state-text" data-i18n="noRacesYet">
+              No races simulated yet.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 F1 Season Simulator</span>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

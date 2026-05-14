@@ -1,0 +1,907 @@
+/* ── Reset & Base ─────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #e8002d;
+  --red-dark: #b8001e;
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #1a1a26;
+  --surface3: #22223a;
+  --border: #2a2a42;
+  --white: #ffffff;
+  --offwhite: #e8e8f0;
+  --muted: #6b6b8a;
+  --positive: #22c55e;
+  --negative: #ef4444;
+  --yellow: #f59e0b;
+
+  /* Team colors */
+  --mercedes: #75f1d3;
+  --ferrari: #d52e37;
+  --mclaren: #ef8733;
+  --haas: #dfe1e2;
+  --redbull: #4570c0;
+  --racingbulls: #7091f8;
+  --alpine: #479fe2;
+  --audi: #eb4526;
+  --williams: #3267d4;
+  --cadillac: #aaaadd;
+  --astonmartin: #4b9774;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--offwhite);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.header {
+  background: var(--surface);
+  border-bottom: 2px solid var(--red);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 16px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  width: 36px;
+  height: 36px;
+  background: var(--red);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+}
+
+.header h1 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Language Toggle ──────────────────────────────────────────── */
+.lang-toggle {
+  display: flex;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lang-btn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn.active {
+  background: var(--red);
+  color: var(--white);
+}
+.lang-btn:hover:not(.active) {
+  color: var(--offwhite);
+}
+
+/* ── Simulate Button ──────────────────────────────────────────── */
+.simulate-btn {
+  background: var(--red);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.simulate-btn:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+}
+.simulate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Main Container ───────────────────────────────────────────── */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Panel ────────────────────────────────────────────────────── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: visible;
+}
+
+.panel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-header h2 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.panel-header .panel-icon {
+  font-size: 1rem;
+}
+.panel-body {
+  padding: 20px;
+}
+
+/* ── Race Info Panel ──────────────────────────────────────────── */
+.race-info-panel .panel-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* When empty state or podium is inside, switch to flex so it centers */
+.race-info-panel .panel-body:has(.empty-state),
+.race-info-panel .panel-body:has(.podium-wrap) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.race-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.race-info-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.race-info-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+}
+.race-info-value.large {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badge-difficulty-very-easy {
+  background: #14532d;
+  color: #86efac;
+}
+.badge-difficulty-easy {
+  background: #1a3a1a;
+  color: #6ee7b7;
+}
+.badge-difficulty-medium {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+.badge-difficulty-hard {
+  background: #5c2a00;
+  color: #fbbf24;
+}
+.badge-difficulty-very-hard {
+  background: #4c0519;
+  color: #fca5a5;
+}
+.badge-weather {
+  background: #1a2640;
+  color: #60a5fa;
+  font-size: 0.68rem;
+}
+.badge-sprint {
+  background: #4a1d96;
+  color: #c4b5fd;
+}
+.badge-night {
+  background: #1a1a40;
+  color: #818cf8;
+}
+
+/* ── Flag ─────────────────────────────────────────────────────── */
+.flag {
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  object-fit: cover;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* ── Grid layouts ─────────────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+/* ── Tables ───────────────────────────────────────────────────── */
+.table-wrapper {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--offwhite);
+  vertical-align: middle;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Position badges */
+.pos-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.pos-1 {
+  background: #f59e0b22;
+  color: #f59e0b;
+  border: 1px solid #f59e0b44;
+}
+.pos-2 {
+  background: #9ca3af22;
+  color: #d1d5db;
+  border: 1px solid #9ca3af44;
+}
+.pos-3 {
+  background: #b4530022;
+  color: #cd7c2f;
+  border: 1px solid #b4530044;
+}
+.pos-other {
+  background: var(--surface2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+/* Driver cell */
+.driver-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.driver-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  background: var(--surface2);
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+}
+
+.driver-avatar-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.driver-name {
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* ── Driver number image ──────────────────────────────────────── */
+.driver-number {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+/* Team cell */
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.team-logo {
+  width: 28px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.team-color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.team-Mercedes {
+  background: var(--mercedes);
+}
+.team-Ferrari {
+  background: var(--ferrari);
+}
+.team-McLaren {
+  background: var(--mclaren);
+}
+.team-Haas {
+  background: var(--haas);
+}
+.team-Red-Bull {
+  background: var(--redbull);
+}
+.team-Racing-Bulls {
+  background: var(--racingbulls);
+}
+.team-Alpine {
+  background: var(--alpine);
+}
+.team-Audi {
+  background: var(--audi);
+}
+.team-Williams {
+  background: var(--williams);
+}
+.team-Cadillac {
+  background: var(--cadillac);
+}
+.team-Aston-Martin {
+  background: var(--astonmartin);
+}
+
+/* Status */
+.status-fin {
+  color: var(--positive);
+  font-weight: 700;
+}
+.status-dnf-mech {
+  color: var(--yellow);
+  font-weight: 700;
+}
+.status-dnf-crash {
+  color: var(--negative);
+  font-weight: 700;
+}
+
+/* Deltas */
+.positive {
+  color: var(--positive);
+  font-weight: 700;
+}
+.negative {
+  color: var(--negative);
+  font-weight: 700;
+}
+.neutral {
+  color: var(--muted);
+}
+
+/* Points chip */
+.points-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: var(--surface2);
+  color: var(--offwhite);
+}
+
+.points-chip.has-points {
+  background: #1a2e1a;
+  color: var(--positive);
+  border: 1px solid #22c55e33;
+}
+
+/* Tyre colors */
+.tyre-soft {
+  color: #ef4444;
+  font-weight: 700;
+}
+.tyre-medium {
+  color: #f59e0b;
+  font-weight: 700;
+}
+.tyre-hard {
+  color: #d1d5db;
+  font-weight: 700;
+}
+.tyre-inter {
+  color: #22c55e;
+  font-weight: 700;
+}
+.tyre-wet {
+  color: #60a5fa;
+  font-weight: 700;
+}
+
+/* ── Tyre image ───────────────────────────────────────────────── */
+.tyre-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tyre-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── History ──────────────────────────────────────────────────── */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.history-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+details.history-card summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: none;
+}
+
+details.history-card summary::-webkit-details-marker {
+  display: none;
+}
+details[open].history-card > summary {
+  border-bottom: 1px solid var(--border);
+}
+details.history-card summary:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.history-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.history-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.history-chevron {
+  font-size: 0.7rem;
+  color: var(--muted);
+  transition: transform 0.2s;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+details[open] .history-chevron {
+  transform: rotate(180deg);
+}
+.history-card-body {
+  padding: 12px 16px;
+}
+.history-results {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-result-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-result-row:last-child {
+  border-bottom: none;
+}
+
+/* ── Standings leader ─────────────────────────────────────────── */
+.standings-leader td:first-child {
+  border-left: 3px solid var(--yellow);
+}
+
+/* ── Empty state ──────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: var(--muted);
+  gap: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+.empty-state-text {
+  font-size: 0.9rem;
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+/* ── Points gap chart ─────────────────────────────────────────── */
+.points-gap-chart {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.points-gap-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.points-gap-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 70px;
+  align-items: center;
+  gap: 10px;
+}
+
+.points-gap-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--offwhite);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.points-gap-bar-wrap {
+  background: var(--surface2);
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.points-gap-bar {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.points-gap-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--offwhite);
+  text-align: right;
+}
+
+/* ── Driver podium (season end) ───────────────────────────────── */
+.podium-wrap {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.podium-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--yellow);
+  letter-spacing: 0.5px;
+}
+
+.podium-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.podium-driver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 180px;
+}
+
+.podium-medal {
+  font-size: 1.6rem;
+}
+
+.podium-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid var(--border);
+}
+
+.podium-avatar-fallback {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.podium-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+}
+.podium-team {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.podium-block {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.podium-pts {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .race-info-panel .panel-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  .race-info-panel .panel-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .header h1 {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 12px;
+  }
+  .header {
+    padding: 0 16px;
+  }
+  .race-info-panel .panel-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Team car image ───────────────────────────────────────────── */
+.team-car {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ── Reset & Export buttons ───────────────────────────────────── */
+.reset-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.reset-btn:hover {
+  border-color: var(--negative);
+  color: var(--negative);
+}
+
+.export-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.export-btn:hover {
+  border-color: var(--positive);
+  color: var(--positive);
+}
