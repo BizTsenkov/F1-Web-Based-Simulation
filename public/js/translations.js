@@ -148,7 +148,7 @@ const translations = {
     points: "Точки",
     ovr: "ОБЩ",
     exp: "ОПИ",
-    rac: "СУМ",
+    rac: "МАЙ",
     awa: "ОСЪ",
     pac: "БЪР",
 
