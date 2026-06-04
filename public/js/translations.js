@@ -122,7 +122,7 @@ const translations = {
     sprintWeekend: "Спринт Уикенд",
     time: "Час",
     weather: "Времe",
-    compounds: "Съединения",
+    compounds: "Гуми",
     yes: "Да",
     no: "Не",
     nightRace: "Нощно Състезание",
@@ -149,7 +149,7 @@ const translations = {
     ovr: "ОБЩ",
     exp: "ОПИ",
     rac: "СУМ",
-    awa: "КОН",
+    awa: "ОСЪ",
     pac: "БЪР",
 
     // History
