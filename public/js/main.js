@@ -518,7 +518,7 @@ function renderPointsGapChart(constructors) {
   const leader = constructors[0].points;
   return `
     <div class="points-gap-chart">
-      <div class="points-gap-title">Points Gap to Leader</div>
+      <div class="points-gap-title">${t("pointsGapTitle")}</div>
       ${constructors
         .map((c) => {
           const pct = Math.round((c.points / leader) * 100);
