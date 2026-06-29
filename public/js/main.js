@@ -233,6 +233,15 @@ function translateStatus(s) {
   );
 }
 
+function translateStrategy(strategy) {
+  const map = {
+    "1-stop": t("oneStop"),
+    "2-stop": t("twoStop"),
+    "Wet strategy": t("wetStrategy"),
+  };
+  return map[strategy] || strategy;
+}
+
 function translateWeather(w) {
   return (
     {
@@ -283,11 +292,15 @@ window.setLanguage = function (lang) {
   if (!btn.disabled)
     btn.textContent = roundNumber > 0 ? t("simulateBtn") : t("startBtn");
   if (driversData.length > 0) {
-    if (lastTrack && lastWeather)
-      document.getElementById("raceInfo").innerHTML = renderRaceInfo(
-        lastTrack,
-        lastWeather,
-      );
+    if (roundNumber >= tracksData.length) {
+  document.getElementById("raceInfo").innerHTML =
+    renderDriverPodium(driversData);
+} else if (lastTrack && lastWeather) {
+  document.getElementById("raceInfo").innerHTML = renderRaceInfo(
+    lastTrack,
+    lastWeather,
+  );
+}
     if (lastResults)
       document.getElementById("raceResultsTable").innerHTML =
         renderRaceResultsTable(lastResults);
@@ -546,7 +559,7 @@ function renderDriverPodium(drivers) {
   const medals = ["🥈", "🥇", "🥉"];
   return `
     <div class="podium-wrap">
-      <div class="podium-title">🏆 Season Champion</div>
+      <div class="podium-title">🏆 ${t("seasonChampion")}</div>
       <div class="podium-row">
         ${order
           .map((idx, vi) => {
@@ -568,7 +581,7 @@ function renderDriverPodium(drivers) {
               <div class="podium-name">${d.name}</div>
               <div class="podium-team" style="color:${color}">${d.team}</div>
               <div class="podium-block" style="height:${heights[vi]};background:${color}22;border-top:3px solid ${color}">
-                <span class="podium-pts">${d.points} pts</span>
+                <span class="podium-pts">${d.points} ${t("pts")}</span>
               </div>
             </div>`;
           })
@@ -645,7 +658,7 @@ function renderRaceResultsTable(results) {
       <td>${driverCell(d.name)}</td>
       <td>${teamCell(d.team)}</td>
       <td>${tyreImg(d.tyre)}</td>
-      <td>${d.strategy}</td>
+      <td>${translateStrategy(d.strategy)}</td>
       <td><span class="${statusClass(d.status)}">${translateStatus(d.status)}</span></td>
       <td><span class="points-chip ${d.racePoints > 0 ? "has-points" : ""}">${d.racePoints}</span></td>
     </tr>`,
@@ -790,11 +803,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initialDriversSnapshot.length > 0)
       document.getElementById("initialRatingsTable").innerHTML =
         renderInitialRatingsTable(initialDriversSnapshot);
-    if (lastTrack && lastWeather)
-      document.getElementById("raceInfo").innerHTML = renderRaceInfo(
-        lastTrack,
-        lastWeather,
-      );
+    if (roundNumber >= tracksData.length) {
+  document.getElementById("raceInfo").innerHTML =
+    renderDriverPodium(driversData);
+} else if (lastTrack && lastWeather) {
+  document.getElementById("raceInfo").innerHTML = renderRaceInfo(
+    lastTrack,
+    lastWeather,
+  );
+}
     if (lastResults)
       document.getElementById("raceResultsTable").innerHTML =
         renderRaceResultsTable(lastResults);
