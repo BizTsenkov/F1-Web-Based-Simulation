@@ -27,7 +27,7 @@ const translations = {
     raceResult: "Race Result",
     driverStandings: "Driver Championship Standings",
     constructorStandings: "Constructor Standings",
-    pointsGapTitle: "Points Gap to Leader",
+	pointsGapTitle: "Points Gap to Leader",
     ratingsAfterRace: "Driver Ratings After Race",
     initialRatings: "Initial Driver Ratings",
     raceHistory: "Race History",
@@ -55,6 +55,11 @@ const translations = {
     fin: "FIN",
     dnfMech: "DNF-MECH",
     dnfCrash: "DNF-CRASH",
+	
+	  // Strategy
+	  oneStop: "1-stop",
+	  twoStop: "2-stop",
+	  wetStrategy: "Wet strategy",
 
     // Difficulty
     veryEasy: "Very Easy",
@@ -103,6 +108,10 @@ const translations = {
 
     // History button
     historyBtn: "History",
+	
+	  // Podium
+	  seasonChampion: "Season Champion",
+	  pts: "pts.",
   },
 
   bg: {
@@ -133,7 +142,7 @@ const translations = {
     raceResult: "Резултат от Състезанието",
     driverStandings: "Класация на Пилотите",
     constructorStandings: "Класация на Конструкторите",
-    pointsGapTitle: "Разлика в точките до лидера",
+	  pointsGapTitle: "Разлика в точките до лидера",
     ratingsAfterRace: "Рейтинги на Пилотите След Състезанието",
     initialRatings: "Начални Рейтинги на Пилотите",
     raceHistory: "История на Състезанията",
@@ -161,6 +170,11 @@ const translations = {
     fin: "ФИН",
     dnfMech: "ОТП-МЕХ",
     dnfCrash: "ОТП-КАТ",
+	
+	  // Strategy
+	  oneStop: "1-стоп",
+	  twoStop: "2-стопа",
+	  wetStrategy: "Мокра стратегия",
 
     // Difficulty
     veryEasy: "Много Лесна",
@@ -211,6 +225,10 @@ const translations = {
 
     // History button
     historyBtn: "История",
+	
+	  // Podium
+	  seasonChampion: "Шампион на Сезона",
+	  pts: "т.",
   },
 };
 
